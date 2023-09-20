@@ -15,6 +15,7 @@ public class UserSpecApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(UserSpecApplication.class, args);
+        System.out.println("Hello this project user test");
     }
 @Bean
     CommandLineRunner adduser(UserRepository userRepository ){
@@ -29,6 +30,11 @@ public class UserSpecApplication {
                 users.setBirthdate(birthdate);
                 userRepository.save(users);
             });
+
+            userRepository.findAll().forEach(user->{
+                System.out.println("This all users"+ user);
+            });
+
         };
 
 }
