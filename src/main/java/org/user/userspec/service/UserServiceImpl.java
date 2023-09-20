@@ -8,6 +8,9 @@ import org.user.userspec.exceptions.EntityNotFoundException;
 import org.user.userspec.repository.UserRepository;
 
 import javax.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Service
 @Transactional
@@ -15,12 +18,16 @@ import javax.transaction.Transactional;
 
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
+    Logger log = LoggerFactory.getLogger(this.getClass().getName());
 
     @Override
     public Users saveUser(Users user) {
+        log.info("Saving new user");
+
         if (!isFrench(user)) {
             throw new IllegalArgumentException("Is Not Resident French");
         }
+
         return userRepository.save(user);
     }
 
